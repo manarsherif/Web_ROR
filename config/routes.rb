@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
-  get 'materials/index'
+  
+ get 'sessions/create'
 
-  get 'materials/new'
+  get 'sessions/destroy'
 
-  get 'materials/create'
+  resources :users
 
-  get 'materials/destroy'
-Web::Application.routes.draw do
-  resources :materials, only: [:index, :new, :create, :destroy]
-  root "materials#index"
-end
+  get 'admin'=>'admin#index'
+  controller :sessions do
+    get 'login'=> :new
+    post 'login'=> :create
+    delete 'logout'=> :destroy
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
